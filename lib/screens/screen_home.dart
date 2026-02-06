@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:statemanage/db/functions/db_functions.dart';
-import 'package:statemanage/screens/widgets/add_student_widget.dart';
-import 'package:statemanage/screens/widgets/list_student_widget.dart';
+//import '../db/controller/student_controller.dart';
+import 'widgets/add_student_widget.dart';
+import 'widgets/list_student_widget.dart';
 
 class ScreenHome extends StatelessWidget {
-  const ScreenHome({super.key});
+  ScreenHome({super.key});
+
+  final StudentController controller =
+      Get.put(StudentController());
 
   @override
   Widget build(BuildContext context) {
-    getAllStudents();
     return Scaffold(
-      body: SafeArea(
-       child: Column(
+      appBar: AppBar(title: const Text('Student Manager')),
+      body: Column(
         children: [
-           AddStudentWidget(),
-           Expanded(child: ListStudentWidget()),
+          AddStudentWidget(),
+          Expanded(child: ListStudentWidget()),
         ],
-      ),
       ),
     );
   }
