@@ -4,7 +4,6 @@ import 'package:statemanage/db/functions/db_functions.dart';
 //import '../../db/controller/student_controller.dart';
 import '../../db/model/data_model.dart';
 
-
 class AddStudentWidget extends StatelessWidget {
   AddStudentWidget({super.key});
 
@@ -27,6 +26,7 @@ class AddStudentWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+
           TextField(
             controller: _ageController,
             decoration: const InputDecoration(
@@ -35,11 +35,24 @@ class AddStudentWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          ElevatedButton.icon(
-            onPressed: addStudent,
-            icon: const Icon(Icons.add),
-            label: const Text('Add Student'),
-          ),
+
+     
+          Obx(() {
+            return ElevatedButton(
+              onPressed: controller.isLoading.value
+                  ? null : addStudent,    
+              child: controller.isLoading.value
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Color.fromARGB(255, 57, 105, 219),
+                      ),
+                    )
+                  : const Text('Add Student'),
+            );
+          }),
         ],
       ),
     );
